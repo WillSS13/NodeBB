@@ -75,16 +75,21 @@ function default_1(Groups) {
             const fields = ['cover:url', 'cover:thumb:url'];
             const values = yield Groups.getGroupFields(data.groupName, fields);
             yield Promise.all(fields.map((field) => {
+                // The next line calls a function in a module that has not been updated to TS yet
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
                 if (!values[field] || !values[field].startsWith(`${nconf_1.default.get('relative_path')}/assets/uploads/files/`)) {
                     return;
                 }
+                // The next line calls a function in a module that has not been updated to TS yet
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
                 const filename = values[field].split('/').pop();
                 const filePath = path_1.default.join(nconf_1.default.get('upload_path'), 'files', filename);
                 return file_1.default.delete(filePath);
             }));
+            // The next line calls a function in a module that has not been updated to TS yet
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
             yield database_1.default.deleteObjectFields(`group:${data.groupName}`, ['cover:url', 'cover:thumb:url', 'cover:position']);
         });
     };
 }
 exports.default = default_1;
-;
