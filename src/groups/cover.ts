@@ -75,7 +75,7 @@ export default function (Groups: groups) {
 
             return { url: url };
         } finally {
-            file.delete(tempPath);
+            file.delete(tempPath) as void;
         }
     };
 
