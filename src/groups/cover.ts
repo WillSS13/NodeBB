@@ -1,14 +1,29 @@
-'use strict';
 
-const path = require('path');
 
-const nconf = require('nconf');
+import path from 'path';
 
-const db = require('../database');
-const image = require('../image');
-const file = require('../file');
+import nconf from 'nconf';
 
-module.exports = function (Groups) {
+import db from '../database';
+import image from '../image';
+import file from '../file';
+
+interface groups {
+    removeCover: (data: Data) => Promise<void>;
+    getGroupFields(groupName: string, fields: string[]): string[];
+    updateCover: (uid: string, data: Data) => Promise<void | { url: string; }>;
+    setGroupField(groupName: string, arg1: string, position: string): unknown;
+    updateCoverPosition: (groupName: string, position: string) => Promise<void>;
+}
+
+interface Data {
+    groupName: string;
+    file: { path: string; type: string; };
+    imageData: string;
+    position: string;
+}
+
+export default function (Groups: groups) {
     const allowedTypes = ['image/png', 'image/jpeg', 'image/bmp'];
     Groups.updateCoverPosition = async function (groupName, position) {
         if (!groupName) {
@@ -63,7 +78,7 @@ module.exports = function (Groups) {
         }
     };
 
-    Groups.removeCover = async function (data) {
+    Groups.removeCover = async function (data: Data) {
         const fields = ['cover:url', 'cover:thumb:url'];
         const values = await Groups.getGroupFields(data.groupName, fields);
         await Promise.all(fields.map((field) => {
@@ -77,4 +92,4 @@ module.exports = function (Groups) {
 
         await db.deleteObjectFields(`group:${data.groupName}`, ['cover:url', 'cover:thumb:url', 'cover:position']);
     };
-};
+}
