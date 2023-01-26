@@ -1386,6 +1386,7 @@ describe('Groups', () => {
                     done();
                 });
             });
+            done();
         });
 
 
