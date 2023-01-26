@@ -11,13 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const nconf_1 = __importDefault(require("nconf"));
 const database_1 = __importDefault(require("../database"));
 const image_1 = __importDefault(require("../image"));
 const file_1 = __importDefault(require("../file"));
-function default_1(Groups) {
+module.exports = function (Groups) {
     const allowedTypes = ['image/png', 'image/jpeg', 'image/bmp'];
     Groups.updateCoverPosition = function (groupName, position) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -91,5 +90,4 @@ function default_1(Groups) {
             yield database_1.default.deleteObjectFields(`group:${data.groupName}`, ['cover:url', 'cover:thumb:url', 'cover:position']);
         });
     };
-}
-exports.default = default_1;
+};

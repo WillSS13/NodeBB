@@ -24,7 +24,7 @@ interface Data {
     url: string;
 }
 
-export default function (Groups: groups) {
+export = function (Groups: groups) {
     const allowedTypes = ['image/png', 'image/jpeg', 'image/bmp'];
     Groups.updateCoverPosition = async function (groupName, position) {
         if (!groupName) {
@@ -98,4 +98,4 @@ export default function (Groups: groups) {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
         await db.deleteObjectFields(`group:${data.groupName}`, ['cover:url', 'cover:thumb:url', 'cover:position']);
     };
-}
+};
