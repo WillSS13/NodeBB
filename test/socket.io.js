@@ -459,22 +459,22 @@ describe('socket.io', () => {
         });
     });
 
-    // it('should toggle plugin install', function (done) {
-    //     this.timeout(0);
-    //     const oldValue = process.env.NODE_ENV;
-    //     process.env.NODE_ENV = 'development';
-    //     socketAdmin.plugins.toggleInstall({
-    //         uid: adminUid,
-    //     }, {
-    //         id: 'nodebb-plugin-location-to-map',
-    //         version: 'latest',
-    //     }, (err, data) => {
-    //         assert.ifError(err);
-    //         assert.equal(data.name, 'nodebb-plugin-location-to-map');
-    //         process.env.NODE_ENV = oldValue;
-    //         done();
-    //     });
-    // });
+    it('should toggle plugin install', function (done) {
+        this.timeout(0);
+        const oldValue = process.env.NODE_ENV;
+        process.env.NODE_ENV = 'development';
+        socketAdmin.plugins.toggleInstall({
+            uid: adminUid,
+        }, {
+            id: 'nodebb-plugin-location-to-map',
+            version: 'latest',
+        }, (err, data) => {
+            assert.ifError(err);
+            assert.equal(data.name, 'nodebb-plugin-location-to-map');
+            process.env.NODE_ENV = oldValue;
+            done();
+        });
+    });
 
     it('should get list of active plugins', (done) => {
         socketAdmin.plugins.getActive({ uid: adminUid }, {}, (err, data) => {

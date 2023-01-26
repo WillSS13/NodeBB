@@ -170,18 +170,18 @@ describe('Plugins', () => {
         });
     });
 
-    // it('should get plugin data from nbbpm', (done) => {
-    //     plugins.get('nodebb-plugin-markdown', (err, data) => {
-    //         assert.ifError(err);
-    //         const keys = ['id', 'name', 'url', 'description', 'latest', 'installed', 'active', 'latest'];
-    //         assert.equal(data.name, 'nodebb-plugin-markdown');
-    //         assert.equal(data.id, 'nodebb-plugin-markdown');
-    //         keys.forEach((key) => {
-    //             assert(data.hasOwnProperty(key));
-    //         });
-    //         done();
-    //     });
-    // });
+    it('should get plugin data from nbbpm', (done) => {
+        plugins.get('nodebb-plugin-markdown', (err, data) => {
+            assert.ifError(err);
+            const keys = ['id', 'name', 'url', 'description', 'latest', 'installed', 'active', 'latest'];
+            assert.equal(data.name, 'nodebb-plugin-markdown');
+            assert.equal(data.id, 'nodebb-plugin-markdown');
+            keys.forEach((key) => {
+                assert(data.hasOwnProperty(key));
+            });
+            done();
+        });
+    });
 
     it('should get a list of plugins', (done) => {
         plugins.list((err, data) => {
